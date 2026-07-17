@@ -21,12 +21,17 @@ pipeline {
                     reuseNode true
                 }
             }
+            environment {
+        HOME = "${WORKSPACE}"
+        NPM_CONFIG_CACHE = "${WORKSPACE}/.npm"
+    }
             steps {
                 sh '''
-                    pwd
+                    echo "HOME=$HOME"
+                    rm -rf node_modules
+                    rm -rf build
                     node -v
-                    npm -v 
-                    ls -la
+                    npm -v
                     npm ci
                     npm run build
                     ls -la
@@ -41,3 +46,4 @@ pipeline {
         }
     }
 }
+
