@@ -40,8 +40,16 @@ pipeline {
         }
 
         stage('Test'){
+             docker {
+                    image 'node:22.23.1'
+                    reuseNode true
+                }
+
             steps {
-                sh 'test -f build/index.html'
+                sh '''
+                    test -f build/index.html
+                    npm test
+                '''
             }
         }
     }
