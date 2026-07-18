@@ -40,10 +40,14 @@ pipeline {
         }
 
         stage('Test'){
-             docker {
+            agent {
+                docker {
                     image 'node:22.23.1'
                     reuseNode true
                 }
+            }
+
+            
 
             steps {
                 sh '''
